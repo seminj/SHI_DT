@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <button type="button" style="background-Color: aqua;" onclick="changeBackground('1')">aqua</button><br/>
+    <button type="button" style="background-Color: violet;">violet</button><br/>
+    <button type="button" style="background-Color: yellowgreen;">yellowgreen</button><br/>
+    <button type="button" style="background-Color: orange;">orange</button><br/>
+    <button type="button" style="background-Color: orangered;">orangered</button><br/>
+    <button type="button" style="background-Color: blue;">blue</button><br/>
+
+</body>
+</html>
+
+<script>
+    //***************************************************
+    // 모든 태그는 id, class 속성을 갖고 있다
+    // name 속성은 input, select, textarea 만 갖고 있다. 
+    //***************************************************
+    // 이벤트가 발생하면 발생한 이벤트 정보를 매개변수로 전달한다
+    function changeBackground(id)
+    {
+        var color=["", "aqua", "violet", "yellowgreen", "orange", "orangered", "blue"];
+        console.log(id);
+        // var body = document.getElementsByTagName("body");
+        // body[0].style.backgroundColor=color[id];
+        
+        var body = document.getElementsById("body");
+        body.style.backgroundColor=color[id];    
+
+        var body = document.querySelector("#body");
+        body.style.backgroundColor=color[id];    
+    }
+</script>
