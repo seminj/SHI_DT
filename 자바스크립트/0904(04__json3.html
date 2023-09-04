@@ -1,0 +1,25 @@
+<!— json3.html —>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    let myproduct = {
+        product_name: "노트북",
+        product_info: [
+            { company: "회사1", model: "modelAAA", price: 20000000 },
+            { company: "회사2", model: "modelBBB", price: 14000000 },
+            { company: "회사3", model: "modelCCC", price: 17000000 },
+        ],
+    };
+
+    console.log(myproduct.product_name);
+    myproduct.product_info.forEach(e => {
+        console.log(`${e.company} ${e.model} ${e.price}`);
+    });
+</script>
