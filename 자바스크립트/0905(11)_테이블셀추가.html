@@ -1,0 +1,61 @@
+<!-- 테이블셀추가.html -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <button type="button" id="btnAdd">추가</button>
+        <button type="button" id="btnDel">삭제</button> <br />
+
+        <table>
+            <thead>
+                <tr>
+                    <th>품목</th>
+                    <th>수량</th>
+                    <th>단가</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+                <tr>
+                    <td><input type="text" name="product_name" id="" /></td>
+                    <td><input type="text" name="product_price" id="" /></td>
+                    <td><input type="text" name="product_count" id="" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
+
+<script>
+    window.onload = function () {
+        let btnAdd = document.getElementById("btnAdd");
+        let btnDel = document.getElementById("btnDel");
+        btnAdd.addEventListener("click", addFunction);
+        btnDel.addEventListener("click", delFunction);
+    };
+
+    function addFunction() {
+        let tbody = document.getElementById("tbody");
+        let row = tbody.insertRow(tbody.rows.length);
+
+        let cell1 = row.insertCell(0);
+        let cell2 = row.insertCell(1);
+        let cell3 = row.insertCell(2);
+
+        cell1.innerHTML = `<input type="text" name="product_name" id="" />`;
+        cell2.innerHTML = `<input type="text" name="product_price" id="" />`;
+        cell3.innerHTML = `<input type="text" name="product_count" id="" />`;
+    }
+
+    function delFunction() {
+        let tbody = document.getElementById("tbody");
+        if (tbody.rows.length > 1) {
+            tbody.deleteRow(tbody.rows.length - 1); //삭제가 되는건 인덱스이므로 5개 있으면 4번방을 삭제
+        } else {
+            console.log("더 이상 삭제가 불가능하다");
+        }
+    }
+</script>
