@@ -1,0 +1,40 @@
+<!-- jquery_checkbox.html -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+        <title>Document</title>
+    </head>
+    <body>
+        <form id="form" name="form">
+            관심분야 : <br />
+            <input type="checkbox" name="interest" value="1" />프로그래밍 <br />
+            <input type="checkbox" name="interest" value="2" />웹프로그래밍
+            <br />
+            <input type="checkbox" name="interest" value="3" />Datebase <br />
+            <input type="checkbox" name="interest" value="4" />빅데이터 <br />
+            <input type="checkbox" name="interest" value="5" />인공지능 <br />
+            <input type="checkbox" name="interest" value="6" />하드웨어 <br />
+            <br />
+            <button id="btnSel">전체선택</button>
+            <!-- type="button 이 없을 경우 submit이다" -->
+            <button id="btnRelease">전체해제</button>
+        </form>
+    </body>
+</html>
+<script>
+    $("#btnSel").click(() => {
+        // submit 기능을 차단한다.
+        event.preventDefault(); //원래 이벤트가 갖는 성격을 막는다
+        $("input[type=checkbox][name=interest]").prop("checked", true);
+        console.log("sel");
+    });
+
+    $("#btnRelease").click(() => {
+        event.preventDefault(); //원래 이벤트가 갖는 성격을 막는다
+        $("input[type=checkbox][name=interest]").prop("checked", false);
+        console.log("rel");
+    });
+</script>

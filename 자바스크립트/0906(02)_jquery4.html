@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--
+        jquery에서 속성 변경은 prop 함수를 사용한다. 
+        prop("style", "color:red"); css를 포함한 모든 속성의 값을 읽고 쓸 수 있다. 
+        css("color","red"); 이 함수는 css만 변경하고 읽어올 수 있고
+    -->
+
+    <h1>속성 변경하기</h1>
+    아이디 : <input type="text" name="" id="">
+    패스워드 : <input type="password" name="" id="">
+
+    <button type="button" id="btnSend">보내기</button>
+</body>
+</html>
+
+<script>
+    $(()=>{
+        $("*").prop("style", "color:blue");
+    })
+
+    $("#btnSend").click( () =>{
+        $("#myform").prop("action", "jquery4.html"); // 내가 서버로 정보를 보내면
+        $("#myform").prop("method","GET");           // jquery4.html이 처리해라
+        $("#myform").submit(); 
+        console.log($("#myform").prop("action")); // 속성값 읽기
+    })
+</script>

@@ -9,3 +9,5 @@ json-server --watch db.json
 
 브라우저로 접근하기
 localhost:3000/table
+
+
