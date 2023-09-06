@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>성적 입력 폼</title>
+</head>
+<body>
+    <h1>성적 입력 폼</h1>
+    <form id="scoreForm">
+        <label for="name">이름:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        
+        <label for="korean">국어 점수:</label>
+        <input type="number" id="korean" name="korean" min="0" max="100" required><br><br>
+        
+        <label for="english">영어 점수:</label>
+        <input type="number" id="english" name="english" min="0" max="100" required><br><br>
+        
+        <label for="math">수학 점수:</label>
+        <input type="number" id="math" name="math" min="0" max="100" required><br><br>
+        
+        <input type="submit" value="등록">
+    </form>
+
+    <h2>성적 표</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>이름</th>
+                <th>국어</th>
+                <th>영어</th>
+                <th>수학</th>
+                <th>총점</th>
+                <th>평균</th>
+            </tr>
+        </thead>
+        <tbody id="scoreTableBody">
+            <!-- 여기에 JavaScript로 동적으로 데이터를 추가할 것입니다. -->
+        </tbody>
+    </table>
+
+    <script>
+        document.getElementById('scoreForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // 사용자 입력 가져오기
+            const name = document.getElementById('name').value;
+            const korean = parseFloat(document.getElementById('korean').value);
+            const english = parseFloat(document.getElementById('english').value);
+            const math = parseFloat(document.getElementById('math').value);
+
+            // 총점 및 평균 계산
+            const total = korean + english + math;
+            const average = total / 3;
+
+            // 표에 데이터 추가
+            const tableBody = document.getElementById('scoreTableBody');
+            const newRow = tableBody.insertRow(tableBody.rows.length);
+            const cellName = newRow.insertCell(0);
+            const cellKorean = newRow.insertCell(1);
+            const cellEnglish = newRow.insertCell(2);
+            const cellMath = newRow.insertCell(3);
+            const cellTotal = newRow.insertCell(4);
+            const cellAverage = newRow.insertCell(5);
+
+            cellName.innerHTML = name;
+            cellKorean.innerHTML = korean;
+            cellEnglish.innerHTML = english;
+            cellMath.innerHTML = math;
+            cellTotal.innerHTML = total;
+            cellAverage.innerHTML = average.toFixed(2);
+
+            // 입력 폼 초기화
+            document.getElementById('scoreForm').reset();
+
+            alert('성적이 저장되었습니다.');
+        });
+    </script>
+</body>
+</html>
