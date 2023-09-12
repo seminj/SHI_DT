@@ -1,0 +1,5 @@
+Desktop\SHI_DT\SHI_DT\NODE_WORKSPACE3\score
+npm install ejs
+npm install @ungap/url-search-params
+npm install bootstrap
+
