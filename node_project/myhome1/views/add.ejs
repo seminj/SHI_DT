@@ -6,8 +6,18 @@
     <title>Document</title>
 </head>
 <body>
-    
-    <!--http://127.0.0.1:3000/test2/add?x=10&y=8-->
-    <h3><%=x%> + <%=y%> = <%=result></h3>
+
+    <!-- http://127.0.0.1:3000/test2/add?x=10&y=8 -->
+
+    <%
+    try
+    {
+    %>
+    <h3><%=x%> + <%=y%> = <%=result%></h3>
+    <%
+    }catch(e){
+        console.log( e);
+    }
+    %>
 </body>
 </html>
