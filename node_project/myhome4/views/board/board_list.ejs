@@ -99,9 +99,28 @@
     });
   })
 
+  function goView(id)
+  {
+    // 검색어를 페이지 바뀔때도 계속 유지해야한다.
+    let searchText = encodeURI($("#searchText").val()); //수신쪽에서는 decodeURI를 해야한다. 
+    $("#searchText").val(searchText);
+    $("#myform").prop("method", "get");
+    $("#myform").prop("action", "/board/list/"+id);
+    $("#myform").submit();
+  }
+
   function goPage(pg)
   {
-      location.href="/board/list/"+pg;
+    //location.href="/board/list/"+pg; //문제가 파라미터가 searchGb, searchText 안따라간다.
+    // 페이지를 누를 때 검색어가 없어진다.
+    // 한글을 get으로 보내면 한글자체로 전송되지 않고 %E2 형태로 바뀌어서 넘어가기 때문에 한글이 깨진다.
+    // 최근에는 브라우저가 자체처리중 좀 낮은 버전 브라우저의 경우 문제 발생 소지가 있다. 
+    let searchText = encodeURI($("#searchText").val()); //수신쪽에서는 decodeURI를 해야한다. 
+    
+    $("#searchText").val(searchText);
+    $("#myform").prop("method", "get");
+    $("#myform").prop("action", "/board/list/"+pg);
+    $("#myform").submit();
   }
 
   function goSelect(id)
