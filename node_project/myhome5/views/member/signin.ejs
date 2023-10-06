@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Star Admin2 </title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="/vendors/feather/feather.css">
+  <link rel="stylesheet" href="/vendors/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="/vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="/vendors/typicons/typicons.css">
+  <link rel="stylesheet" href="/vendors/simple-line-icons/css/simple-line-icons.css">
+  <link rel="stylesheet" href="/vendors/css/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="/css/vertical-layout-light/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="/images/favicon.png" />
+  <script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+  crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+      <div class="content-wrapper d-flex align-items-center auth px-0">
+        <div class="row w-100 mx-0">
+          <div class="col-lg-4 mx-auto">
+            <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+              <div class="brand-logo">
+                <img src="images/logo.svg" alt="logo">
+              </div>
+              <div class="card-body">
+                <h4 class="card-title">회원가입</h4>
+                <p class="card-description">
+                  회원가입
+                </p>
+
+                <form id="myform" class="forms-sample">
+                  <input type="hidden" id="idcheckyn" value="N">
+
+                  <div class="form-group row">
+                    <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Userid</label>
+                    <div class="input-group col-sm-9">
+                      <input type="text" class="form-control" id="userid" name="userid"
+                       placeholder="Username">
+                       <button class="btn btn-primary" type="button" id="btnDuplicate">중복체크</button> 
+                    </div>
+
+                  </div>
+
+                  <div class="form-group row">
+                    <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Password</label>
+                    <div class="col-sm-9">
+                      <input type="password" class="form-control" id="password1" name="password1" placeholder="Email">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="exampleInputMobile" class="col-sm-3 col-form-label">Password confirm</label>
+                    <div class="col-sm-9">
+                      <input type="password" class="form-control" id="password2" name="password2" placeholder="Mobile number">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Username</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="username" name="username" placeholder="Password">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="exampleInputConfirmPassword2" class="col-sm-3 col-form-label">phone</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="phone" name="phone" placeholder="Password">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="exampleInputConfirmPassword2" class="col-sm-3 col-form-label">email</label>
+                    <div class="col-sm-9">
+                      <input type="email" class="form-control" id="email" name="email" placeholder="Password">
+                    </div>
+                  </div>
+
+                
+                  <button type="button" id="btnSend" class="btn btn-primary me-2">Submit</button>
+                  <button class="btn btn-light"  id="btnCancel" >Cancel</button>
+                </form>
+              </div>
+         
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- content-wrapper ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+  <!-- plugins:js -->
+  <script src="/vendors/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="/js/off-canvas.js"></script>
+  <script src="/js/hoverable-collapse.js"></script>
+  <script src="/js/template.js"></script>
+  <script src="/js/settings.js"></script>
+  <script src="/js/todolist.js"></script>
+  <!-- endinject -->
+</body>
+
+</html>
+
+<script>
+  $(()=>{
+    //아이디 중복체크를 한다 
+    $("#btnDuplicate").click(  ()=>{
+        let userid = $("#userid").val();
+        if( userid=="")
+        {
+          alert("아이디를 입력하세요");
+          $("#userid").focus();     //userid   태그로 포커스가 가도록 한다 
+          return false;             //함수를 강제 종료한다 
+        }
+
+        //서버가 받아서 디비에 아이디가 존재하는지 확인한다. 
+        $.ajax( {
+          url:"/member/idcheck", 
+          data:{"userid":userid},
+          dataType:"json",  //데이터를 받아올때 json 타입으로 받아온다 
+          type:"post"
+        })
+        .done( (res)=>{
+          //서버에서 보내는 정보를 받아온다 
+          console.log( res );
+          if(res.result == "success") //중복이 아님 사용가능한 아이디임 
+          {
+            alert("사용가능한 아이디입니다.");
+            $("#idcheckyn").val("Y"); //아이디중복체크를 했다 사용가능한 아이디이다 
+            $("#userid").prop("readonly", true); 
+            //readonly와 disabled - 둘다 입력을 막는다  readonly는 서버로 이미있는데이터를 보낸다.
+            //disabled 는 서버로 정보를 보내지 않는다 
+           
+            
+          }
+          else 
+          {
+            alert("이미 사용중인 아이디입니다");
+          }
+        })
+        .fail((res, error, status)=>{
+          console.log( error );
+        });
+    })
+
+
+    $("#btnSend").click(()=>{
+      //오류체크 하고 나서 
+      if( $("#idcheckyn").val()!="Y")
+      {
+          alert("아이디 중복체크를 하세요");
+          $("#userid").focus();     //userid   태그로 포커스가 가도록 한다 
+          return false;
+      }
+      
+      //서버로 보내야 할 정보가 많을때 태그의 요소 하나씩 값을 가져와서 data:{userid:userid, ,,,,, } 이렇게 
+      //묶어서 보내려면 코드가 많다. 그래서 serialize() 함수를 쓰면 저 작업들을 알아서 해준다. 
+      //단 id 가 꼭 있어야 한다 , 만일 파일을 첨부할경우에는 serialize 를 사용못하고 FormData 라는 객체를 써야 한다 
+      //userid=admin&password1=%60%60%60%60&password2=1111&username=222&phone=333&email=33333
+      //name속성을 이용해서 작성한다 
+
+      let params = $("#myform").serialize(); 
+      console.log( params );
+      $.ajax( {
+        url:"/member/save",
+        data:params,
+        dataType:"json",
+        type:"post"  
+      })
+      .done( (res)=>{
+        if(res.result=="success")
+        {
+          alert("회원가입을 축하합니다"); 
+          location.href="/member/login";
+        }
+      })
+      .fail( (res, error, status)=>{
+        console.log( error );
+      })
+      
+
+
+    });
+  })
+ 
+</script>
